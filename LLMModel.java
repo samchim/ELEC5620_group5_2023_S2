@@ -14,7 +14,7 @@ import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSession;
 
-class LLLModel{
+class LLModel{
     private static String url = "https://api.openai.com/v1/chat/completions"; 
 
     /*Attentions: be careful with this key */
@@ -59,10 +59,7 @@ class LLLModel{
        }
    }
 
-   /*
-    * @
-    */
-   public static String extractMessageFromJSONResponse(String response) {
+   private static String extractMessageFromJSONResponse(String response) {
        int start = response.indexOf("content")+ 11;
        int end = response.indexOf("\"", start);
        return response.substring(start, end);

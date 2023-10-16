@@ -1,8 +1,7 @@
-public class TravelTourGuide extends LLLModel
-{
+public class TravelTourGuide{
+    private static LLModel llm;
+    private static LocationGetter locationGetter;
     public static void main(String[] args) {
-        String res = LLLModel.chatGPT("please make a short introducation about yourself");
-        System.out.println(res);
+        System.out.println(llm.chatGPT("tell me what chatgpt is"));
     }
 }
-
