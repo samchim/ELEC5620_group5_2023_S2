@@ -11,21 +11,21 @@ const TouristHomePage = () => {
           </Typography>
         </Grid>
         <Grid item>
-          <Link href="/tourist/login" passHref>
+          <Link href="/tourist/location" passHref>
             <Button variant="contained" color="primary">
               Update Location
             </Button>
           </Link>
         </Grid>
         <Grid item>
-          <Link href="/business/login" passHref>
+          <Link href="/business/article" passHref>
             <Button variant="contained" color="primary">
               Short article
             </Button>
           </Link>
         </Grid>
         <Grid item>
-          <Link href="/advertiser/login" passHref>
+          <Link href="/advertiser/conversation" passHref>
             <Button variant="contained" color="primary">
               Start Conversation
             </Button>
