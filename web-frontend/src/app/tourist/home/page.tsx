@@ -1,33 +1,33 @@
 import Link from "next/link";
 import { Button, Container, Grid, Typography } from "@mui/material";
 
-const HomePage = () => {
+const TouristHomePage = () => {
   return (
     <Container>
       <Grid container spacing={2} justifyContent="center" alignItems="center">
         <Grid item xs={12}>
           <Typography variant="h3" align="center" gutterBottom>
-            Welcome to Our Website
+            Welcome Tourist
           </Typography>
         </Grid>
         <Grid item>
           <Link href="/tourist/login" passHref>
             <Button variant="contained" color="primary">
-              Tourist Login
+              Update Location
             </Button>
           </Link>
         </Grid>
         <Grid item>
           <Link href="/business/login" passHref>
             <Button variant="contained" color="primary">
-              Business Login
+              Short article
             </Button>
           </Link>
         </Grid>
         <Grid item>
           <Link href="/advertiser/login" passHref>
             <Button variant="contained" color="primary">
-              Advertiser Login
+              Start Conversation
             </Button>
           </Link>
         </Grid>
@@ -36,4 +36,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default TouristHomePage;
