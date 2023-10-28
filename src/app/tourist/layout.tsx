@@ -26,8 +26,8 @@ const useStyles = makeStyles(() =>
 );
 
 const defaultAdvertisement: TouristAdvertisement = {
-  heading: "loading...",
-  text: "loading...",
+  name: "loading...",
+  description: "loading...",
   imageUrl: "",
 };
 
@@ -39,10 +39,10 @@ const TouristLayout = ({ children }: { children: React.ReactNode }) => {
   const getAdvertisementFromApi = async () => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
     return {
-      heading: "advertisement from api",
-      text: "advertisement from api",
+      name: "advertisement from api",
+      description: "advertisement from api",
       imageUrl: "",
-    };
+    } as TouristAdvertisement;
   };
 
   useEffect(() => {
@@ -59,8 +59,8 @@ const TouristLayout = ({ children }: { children: React.ReactNode }) => {
       <div className={classes.content}>{children}</div>
       <div className={classes.advertisementContainer}>
         <AdvertisementCard
-          heading={advertisement.heading}
-          text={advertisement.text}
+          name={advertisement.name}
+          description={advertisement.description}
           imageUrl={advertisement.imageUrl}
         />
       </div>

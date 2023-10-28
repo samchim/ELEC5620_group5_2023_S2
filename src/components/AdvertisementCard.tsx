@@ -8,13 +8,19 @@ import Typography from "@mui/material/Typography";
 import { propagateServerField } from "next/dist/server/lib/render-server";
 
 export type TouristAdvertisement = {
-  heading: string;
-  text: string;
+  name: string;
+  description: string;
   imageUrl: string;
 };
 
+export type FullAdvertisement = {
+  id: string;
+  investment: number;
+  isApproved: boolean;
+} & TouristAdvertisement;
+
 export default function AdvertisementCard(props: TouristAdvertisement) {
-  const { heading, text, imageUrl } = props;
+  const { name, description, imageUrl } = props;
   return (
     <Card>
       <Image
@@ -30,10 +36,10 @@ export default function AdvertisementCard(props: TouristAdvertisement) {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {heading}
+          {name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {text}
+          {description}
         </Typography>
       </CardContent>
       {/* <CardActions>
