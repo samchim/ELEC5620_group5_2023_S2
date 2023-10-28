@@ -5,33 +5,6 @@ import { MessageLeft, MessageQueue, MessageRight } from "@/components/Message";
 import { Button, Container, Grid, Paper, Typography } from "@mui/material";
 import { useState } from "react";
 
-const testMessageQueue: MessageQueue = [
-  {
-    message: "Hello",
-    from: "tourist",
-  },
-  {
-    message: "Hi",
-    from: "llm",
-  },
-  {
-    message: "How are you?",
-    from: "tourist",
-  },
-  {
-    message: "I'm fine, thank you.",
-    from: "llm",
-  },
-  {
-    message: "Goodbye",
-    from: "tourist",
-  },
-  {
-    message: "Bye",
-    from: "llm",
-  },
-];
-
 const TouristConversationPage = () => {
   const [userMessage, setUserMessage] = useState<string>("");
   const [messageQueue, setMessageQueue] = useState<MessageQueue>([]);
