@@ -18,14 +18,14 @@ const TouristHomePage = () => {
           </Link>
         </Grid>
         <Grid item>
-          <Link href="/business/article" passHref>
+          <Link href="/tourist/article" passHref>
             <Button variant="contained" color="primary">
               Short article
             </Button>
           </Link>
         </Grid>
         <Grid item>
-          <Link href="/advertiser/conversation" passHref>
+          <Link href="/tourist/conversation" passHref>
             <Button variant="contained" color="primary">
               Start Conversation
             </Button>
