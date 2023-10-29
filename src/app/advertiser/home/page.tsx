@@ -32,7 +32,7 @@ const AdvertiserHomePage = () => {
 
   const [advertisement, setAdvertisement] = useState<FullAdvertisement>({
     ...defaultFullAdvertisement,
-    name: username || "",
+    id: username || "",
   });
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");

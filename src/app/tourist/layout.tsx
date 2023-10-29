@@ -37,11 +37,7 @@ const TouristLayout = ({ children }: { children: React.ReactNode }) => {
 
   const getAdvertisementFromApi = async () => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
-    return {
-      name: "advertisement from api",
-      description: "advertisement from api",
-      imageUrl: "",
-    } as TouristAdvertisement;
+    return defaultTouristAdvertisement;
   };
 
   useEffect(() => {
@@ -66,7 +62,6 @@ const TouristLayout = ({ children }: { children: React.ReactNode }) => {
         <AdvertisementCard
           name={advertisement.name}
           description={advertisement.description}
-          imageUrl={advertisement.imageUrl}
         />
       </div>
     </div>

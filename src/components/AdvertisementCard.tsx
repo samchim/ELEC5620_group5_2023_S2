@@ -14,7 +14,7 @@ export type TouristAdvertisement = {
 
 export const defaultTouristAdvertisement: TouristAdvertisement = {
   name: "loading...",
-  description: "loading...",
+  description: JSON.stringify({ title: "loading...", content: "loading..." }),
 };
 
 export type FullAdvertisement = {
