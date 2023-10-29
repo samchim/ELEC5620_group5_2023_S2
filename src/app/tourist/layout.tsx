@@ -4,6 +4,7 @@ import AdvertisementCard, {
   TouristAdvertisement,
 } from "@/components/AdvertisementCard";
 import { createStyles, makeStyles } from "@mui/styles";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const useStyles = makeStyles(() =>
@@ -35,6 +36,8 @@ const TouristLayout = ({ children }: { children: React.ReactNode }) => {
   const classes = useStyles();
   const [advertisement, setAdvertisement] =
     useState<TouristAdvertisement>(defaultAdvertisement);
+  const router = useRouter();
+  const pathname = usePathname();
 
   const getAdvertisementFromApi = async () => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -46,6 +49,12 @@ const TouristLayout = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
+    const username = localStorage.getItem("username");
+    console.log(pathname);
+    if (!username && !["/tourist/signup", "tourist/login"].includes(pathname)) {
+      router.push("/tourist/login");
+    }
+
     const updateAdvertisement = async () => {
       const newAdvertisement = await getAdvertisementFromApi();
       setAdvertisement(newAdvertisement);

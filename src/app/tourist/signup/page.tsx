@@ -13,19 +13,46 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { Alert } from "@mui/material";
+import { baseApiUrl, fetchFromApi } from "@/components/Util";
+import { useRouter } from "next/navigation";
 
 const SignUpPage = () => {
-  const [email, setEmail] = React.useState("");
+  const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
+  const [errorMessage, setErrorMessage] = React.useState("");
+  const router = useRouter();
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email,
-      password,
+    if (password !== confirmPassword) {
+      setErrorMessage("Passwords do not match");
+      return;
+    }
+
+    if (!username || !password) {
+      setErrorMessage("Please enter username and password");
+      return;
+    }
+
+    const apiResponse = await fetchFromApi(`/tourist/register`, {
+      method: "POST",
+      body: JSON.stringify({
+        username,
+        encryptedPassword: password,
+        type: "tourist",
+      }),
     });
+
+    if (!apiResponse.ok) {
+      setErrorMessage(await apiResponse.text());
+    } else {
+      localStorage.setItem("username", username);
+
+      setErrorMessage("");
+      router.push("/tourist/home");
+    }
   };
 
   return (
@@ -45,6 +72,7 @@ const SignUpPage = () => {
         <Typography component="h1" variant="h5">
           Sign Up
         </Typography>
+        {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
             margin="normal"
@@ -60,8 +88,8 @@ const SignUpPage = () => {
               },
             }}
             autoFocus
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
           <TextField
             margin="normal"

@@ -1,7 +1,17 @@
+"use client";
+
 import Link from "next/link";
 import { Button, Container, Grid, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 const TouristHomePage = () => {
+  const router = useRouter();
+
+  const handleLogOut = () => {
+    localStorage.removeItem("username");
+    router.push("/tourist/login");
+  };
+
   return (
     <Container>
       <Grid container spacing={2} justifyContent="center" alignItems="center">
@@ -30,6 +40,11 @@ const TouristHomePage = () => {
               Start Conversation
             </Button>
           </Link>
+        </Grid>
+        <Grid item>
+          <Button variant="contained" color="secondary" onClick={handleLogOut}>
+            Log out
+          </Button>
         </Grid>
       </Grid>
     </Container>

@@ -14,21 +14,39 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useRouter } from "next/navigation";
+import { Alert } from "@mui/material";
+import { fetchFromApi } from "@/components/Util";
 
 const LoginPage = () => {
-  const [email, setEmail] = React.useState("");
+  const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [errorMessage, setErrorMessage] = React.useState("");
   const router = useRouter();
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email,
-      password,
+    if (!username || !password) {
+      setErrorMessage("Please enter username and password");
+      return;
+    }
+
+    const apiResponse = await fetchFromApi(`/tourist/login`, {
+      method: "POST",
+      body: JSON.stringify({
+        username,
+        encryptedPassword: password,
+        type: "tourist",
+      }),
     });
-    // jump to /tourist/home
-    router.push("/tourist/home");
+
+    if (!apiResponse.ok) {
+      setErrorMessage("Login Failed");
+    } else {
+      localStorage.setItem("username", username);
+
+      setErrorMessage("");
+      router.push("/tourist/home");
+    }
   };
 
   return (
@@ -48,6 +66,7 @@ const LoginPage = () => {
         <Typography component="h1" variant="h5">
           Login
         </Typography>
+        {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
             margin="normal"
@@ -63,8 +82,8 @@ const LoginPage = () => {
               },
             }}
             autoFocus
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
           <TextField
             margin="normal"
