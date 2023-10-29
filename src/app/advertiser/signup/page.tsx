@@ -17,7 +17,7 @@ import { Alert } from "@mui/material";
 import { baseApiUrl, fetchFromApi } from "@/components/Util";
 import { useRouter } from "next/navigation";
 
-const TouristSignUpPage = () => {
+const AdvertiserSignUpPage = () => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
@@ -36,22 +36,22 @@ const TouristSignUpPage = () => {
       return;
     }
 
-    const apiResponse = await fetchFromApi(`/tourist/register`, {
+    const apiResponse = await fetchFromApi(`/advertiser/register`, {
       method: "POST",
       body: JSON.stringify({
         username,
         encryptedPassword: password,
-        type: "tourist",
+        type: "advertiser",
       }),
     });
 
     if (!apiResponse.ok) {
       setErrorMessage(await apiResponse.text());
     } else {
-      localStorage.setItem("username", username);
+      localStorage.setItem("advertiser_username", username);
 
       setErrorMessage("");
-      router.push("/tourist/home");
+      router.push("/advertiser/home");
     }
   };
 
@@ -131,4 +131,4 @@ const TouristSignUpPage = () => {
   );
 };
 
-export default TouristSignUpPage;
+export default AdvertiserSignUpPage;

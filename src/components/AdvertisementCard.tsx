@@ -13,11 +13,26 @@ export type TouristAdvertisement = {
   imageUrl: string;
 };
 
+export const defaultTouristAdvertisement: TouristAdvertisement = {
+  name: "loading...",
+  description: "loading...",
+  imageUrl: "",
+};
+
 export type FullAdvertisement = {
   id: string;
   investment: number;
   isApproved: boolean;
 } & TouristAdvertisement;
+
+export const defaultFullAdvertisement: FullAdvertisement = {
+  id: "loading...",
+  investment: 0,
+  isApproved: false,
+  name: "name",
+  description: "description",
+  imageUrl: "",
+};
 
 export default function AdvertisementCard(props: TouristAdvertisement) {
   const { name, description, imageUrl } = props;

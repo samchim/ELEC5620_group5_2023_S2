@@ -13,45 +13,39 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { Alert } from "@mui/material";
-import { baseApiUrl, fetchFromApi } from "@/components/Util";
 import { useRouter } from "next/navigation";
+import { Alert } from "@mui/material";
+import { fetchFromApi } from "@/components/Util";
 
-const TouristSignUpPage = () => {
+const AdvertiserLoginPage = () => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [confirmPassword, setConfirmPassword] = React.useState("");
   const [errorMessage, setErrorMessage] = React.useState("");
   const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (password !== confirmPassword) {
-      setErrorMessage("Passwords do not match");
-      return;
-    }
-
     if (!username || !password) {
       setErrorMessage("Please enter username and password");
       return;
     }
 
-    const apiResponse = await fetchFromApi(`/tourist/register`, {
+    const apiResponse = await fetchFromApi(`/advertiser/login`, {
       method: "POST",
       body: JSON.stringify({
         username,
         encryptedPassword: password,
-        type: "tourist",
+        type: "advertiser",
       }),
     });
 
     if (!apiResponse.ok) {
-      setErrorMessage(await apiResponse.text());
+      setErrorMessage("Login Failed");
     } else {
-      localStorage.setItem("username", username);
+      localStorage.setItem("advertiser_username", username);
 
       setErrorMessage("");
-      router.push("/tourist/home");
+      router.push("/advertiser/home");
     }
   };
 
@@ -70,7 +64,7 @@ const TouristSignUpPage = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign Up
+          Login
         </Typography>
         {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -99,19 +93,14 @@ const TouristSignUpPage = () => {
             label="Password"
             id="password"
             type="password"
+            // inputProps={{
+            //   autocomplete: "current-password",
+            //   form: {
+            //     autocomplete: "off",
+            //   },
+            // }}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="confirm_password"
-            label="Confirm Password"
-            id="confirm_password"
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
           />
           {/* <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -123,12 +112,24 @@ const TouristSignUpPage = () => {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign Up
+            Login
           </Button>
+          <Grid container>
+            <Grid item xs>
+              {/* <Link href="#" variant="body2">
+                Forgot password?
+              </Link> */}
+            </Grid>
+            <Grid item>
+              <Link href="./signup" variant="body2">
+                {"Don't have an account? Sign Up"}
+              </Link>
+            </Grid>
+          </Grid>
         </Box>
       </Box>
     </Container>
   );
 };
 
-export default TouristSignUpPage;
+export default AdvertiserLoginPage;

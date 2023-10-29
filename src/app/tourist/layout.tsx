@@ -2,6 +2,7 @@
 
 import AdvertisementCard, {
   TouristAdvertisement,
+  defaultTouristAdvertisement,
 } from "@/components/AdvertisementCard";
 import { createStyles, makeStyles } from "@mui/styles";
 import { usePathname, useRouter } from "next/navigation";
@@ -26,16 +27,11 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const defaultAdvertisement: TouristAdvertisement = {
-  name: "loading...",
-  description: "loading...",
-  imageUrl: "",
-};
-
 const TouristLayout = ({ children }: { children: React.ReactNode }) => {
   const classes = useStyles();
-  const [advertisement, setAdvertisement] =
-    useState<TouristAdvertisement>(defaultAdvertisement);
+  const [advertisement, setAdvertisement] = useState<TouristAdvertisement>(
+    defaultTouristAdvertisement
+  );
   const router = useRouter();
   const pathname = usePathname();
 

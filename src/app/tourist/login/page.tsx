@@ -17,7 +17,7 @@ import { useRouter } from "next/navigation";
 import { Alert } from "@mui/material";
 import { fetchFromApi } from "@/components/Util";
 
-const LoginPage = () => {
+const TouristLoginPage = () => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [errorMessage, setErrorMessage] = React.useState("");
@@ -132,4 +132,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default TouristLoginPage;
