@@ -1,15 +1,27 @@
 "use client";
 
-import { MessageLeft } from "@/components/Message";
+import { MessageLeft, MessageRight } from "@/components/Message";
+import { fetchFromApi } from "@/components/Util";
 import { Button, Container, Grid, Paper, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const TouristArticlePage = () => {
   const [article, setArticle] = useState<string>("loading...");
+  const router = useRouter();
+  const location = localStorage.getItem("location");
 
   const getArticleFromApi = async () => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    return "article from api long long long long long long long long";
+    if (!location) {
+      router.push("/tourist/location");
+    }
+
+    const apiResponse = await fetchFromApi(
+      `/tourist/geo_ChatGPT?cityName=${location}`,
+      { method: "GET" }
+    );
+    console.log(apiResponse);
+    return await apiResponse.text();
   };
 
   useEffect(() => {
@@ -25,8 +37,18 @@ const TouristArticlePage = () => {
     <Container>
       <Typography variant="h4">Short Article</Typography>
       <Paper>
+        <MessageRight message={`please tell me some facts about ${location}`} />
         <MessageLeft message={article} />
       </Paper>
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={() => {
+          router.push("/tourist/home");
+        }}
+      >
+        Back
+      </Button>
     </Container>
   );
 };
