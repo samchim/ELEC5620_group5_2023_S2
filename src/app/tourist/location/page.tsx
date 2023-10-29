@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Button, Container, Typography, Grid, TextField } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { fetchFromApi } from "@/components/Util";
 
 type GeoLocation = {
   latitude: number;
@@ -33,7 +34,15 @@ const TouristLocationPage = () => {
   const getLocationFromGeoLocationFromApi = async (
     geoLocation: GeoLocation
   ): Promise<string> => {
-    return "from geoLocation";
+    const apiResponse = await fetchFromApi(
+      `/tourist/geo_GetCity?longitude=${geoLocation.longitude}&latitude=${geoLocation.latitude}`,
+      {
+        method: "GET",
+      }
+    );
+    console.log(apiResponse);
+    const location = await apiResponse.text();
+    return location;
   };
 
   const handleGetLocationFromGeoLocation = async () => {
