@@ -4,27 +4,15 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped using [`create-nex
 
 ## How to use
 
-Download the example [or clone the repo](https://github.com/mui/material-ui):
+Install [node JS](https://nodejs.org/en)
 
-<!-- #default-branch-switch -->
-
-```bash
-curl https://codeload.github.com/mui/material-ui/tar.gz/master | tar -xz --strip=2  material-ui-master/examples/material-ui-nextjs-ts
-cd material-ui-nextjs-ts
 ```
-
-Install dependencies and run:
-
-```bash
+cd ELEC5060
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `src/app/page.tsx`. The page auto-updates as you edit the file.
-
-This example uses [`next/font/google`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts#google-fonts) to automatically optimize and load Roboto, a custom Google Font.
+the app will be running on [http://localhost:3000](http://localhost:3000)
 
 ## Learn more
 
