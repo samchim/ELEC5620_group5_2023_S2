@@ -78,11 +78,11 @@ const TouristSignUpPage = () => {
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
+            id="username"
+            label="Username"
+            name="username"
             inputProps={{
-              autoComplete: "email",
+              autoComplete: "username",
               form: {
                 autoComplete: "off",
               },
