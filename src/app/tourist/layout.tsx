@@ -4,6 +4,7 @@ import AdvertisementCard, {
   TouristAdvertisement,
   defaultTouristAdvertisement,
 } from "@/components/AdvertisementCard";
+import { fetchFromApi } from "@/components/Util";
 import { createStyles, makeStyles } from "@mui/styles";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -36,7 +37,23 @@ const TouristLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
 
   const getAdvertisementFromApi = async () => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    const apiResult = await fetchFromApi(`/tourist/listAdvertisers`);
+    if (apiResult.ok) {
+      const advertiserList = await apiResult.json();
+
+      let maxInvestment = 0;
+      let maxIndex = 0;
+      for (let index = 0; index < advertiserList.length; index++) {
+        const advertiser = advertiserList[index];
+        if (advertiser.investment > maxInvestment && advertiser.approved) {
+          maxInvestment = advertiser.investment;
+          maxIndex = index;
+        }
+      }
+
+      return advertiserList[maxIndex];
+    }
+
     return defaultTouristAdvertisement;
   };
 
