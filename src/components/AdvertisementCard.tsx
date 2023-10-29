@@ -10,35 +10,33 @@ import { propagateServerField } from "next/dist/server/lib/render-server";
 export type TouristAdvertisement = {
   name: string;
   description: string;
-  imageUrl: string;
 };
 
 export const defaultTouristAdvertisement: TouristAdvertisement = {
   name: "loading...",
   description: "loading...",
-  imageUrl: "",
 };
 
 export type FullAdvertisement = {
   id: string;
   investment: number;
-  isApproved: boolean;
+  approved: boolean;
 } & TouristAdvertisement;
 
 export const defaultFullAdvertisement: FullAdvertisement = {
   id: "loading...",
   investment: 0,
-  isApproved: false,
+  approved: false,
   name: "name",
-  description: "description",
-  imageUrl: "",
+  description: JSON.stringify({ title: "title", content: "content" }),
 };
 
 export default function AdvertisementCard(props: TouristAdvertisement) {
-  const { name, description, imageUrl } = props;
+  const { name, description } = props;
+  const { title, content } = JSON.parse(description);
   return (
     <Card>
-      <Image
+      {/* <Image
         alt="Random image"
         src={imageUrl}
         width={640}
@@ -48,13 +46,13 @@ export default function AdvertisementCard(props: TouristAdvertisement) {
           height: "200px",
           objectFit: "cover",
         }}
-      />
+      /> */}
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {name}
+          {title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {description}
+          {content}
         </Typography>
       </CardContent>
       {/* <CardActions>
